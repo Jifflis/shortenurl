@@ -8,6 +8,7 @@ class Api{
   final String key = 'key=a207c85f877168bb9e8b85b27c04796b18d66&';
   final String short = 'short=';
   final String name = '&name=';
+  final String stats = 'stats=';
 
   ///http get request
   ///

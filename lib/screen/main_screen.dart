@@ -40,9 +40,42 @@ class MainScreen extends StatelessWidget {
                   ),
                   Center(
                     child: FlatButton(
-                      onPressed: model.loading ? null : () => model.generate(),
+                      onPressed: model.loading ? null : () => model.generateShortUrl(),
                       child: Text(
-                        'generate',
+                        'generate short url',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      disabledColor: Colors.grey,
+                      color: Colors.blue,
+                    ),
+                  ),
+
+                  SizedBox(height: 50,),
+
+                  Text('short url:'),
+                  TextField(controller: model.shorUrlController),
+                  SizedBox(
+                    height: 42,
+                  ),
+                  SizedBox(
+                    height: 14,
+                  ),
+                  Text('long url:'),
+                  SizedBox(
+                    height: 14,
+                  ),
+                  Text(
+                    model.longUrl,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  SizedBox(
+                    height: 42,
+                  ),
+                  Center(
+                    child: FlatButton(
+                      onPressed: model.loading ? null : () => model.generateLongUrl(),
+                      child: Text(
+                        'get long url',
                         style: TextStyle(color: Colors.white),
                       ),
                       disabledColor: Colors.grey,
@@ -51,6 +84,7 @@ class MainScreen extends StatelessWidget {
                   )
                 ],
               ),
+
               if (model.loading)
                 Center(
                   child: CircularProgressIndicator(),

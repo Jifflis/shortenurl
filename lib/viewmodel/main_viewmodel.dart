@@ -5,11 +5,13 @@ import 'package:oktoast/oktoast.dart';
 
 class MainViewmodel extends ChangeNotifier {
   TextEditingController longUrlController = TextEditingController();
+  TextEditingController shorUrlController = TextEditingController();
 
   MainRepository _repository = MainRepository();
 
   bool _isLoading = false;
   String shortUrl = 'n/a';
+  String longUrl = 'n/a';
 
   set loading(bool flag) {
     _isLoading = flag;
@@ -21,13 +23,29 @@ class MainViewmodel extends ChangeNotifier {
   ///generate shortlink
   ///
   ///
-  Future<void> generate() async {
+  Future<void> generateShortUrl() async {
     loading = true;
 
     try{
       shortUrl =
-      await _repository.generate(longUrlController.text,'');
+      await _repository.generateShortUrl(longUrlController.text,'');
       print(shortUrl);
+    }catch (e){
+      showToast(e.toString());
+    }
+
+    loading = false;
+  }
+
+  ///generate longlink
+  ///
+  ///
+  Future<void> generateLongUrl() async {
+    loading = true;
+
+    try{
+      longUrl =
+      await _repository.generateLongUrl(shorUrlController.text);
     }catch (e){
       showToast(e.toString());
     }

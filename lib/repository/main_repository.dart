@@ -10,7 +10,7 @@ class MainRepository {
   ///generate shortlink
   ///
   ///
-  Future<String> generate(String longUrl, String name) async {
+  Future<String> generateShortUrl(String longUrl, String name) async {
     String url = '${_api.endpoint}'
         '${_api.key}'
         '${_api.short}'
@@ -23,6 +23,21 @@ class MainRepository {
     Map<String, dynamic> map = jsonDecode(response.body);
     _validate(map['url']['status']);
     return map['url']['shortLink'];
+  }
+
+  ///generate shortlink
+  ///
+  ///
+  Future<String> generateLongUrl(String short) async {
+    String url = '${_api.endpoint}'
+        '${_api.key}'
+        '${_api.stats}'
+        '$short';
+
+    http.Response response = await _api.get(url);
+
+    Map<String, dynamic> map = jsonDecode(response.body);
+    return map['stats']['fullLink'];
   }
 
   ///validate response
